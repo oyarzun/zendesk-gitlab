@@ -35,7 +35,7 @@
                     dataType: 'json',
                     data: data,
                     headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
-                    secure: false,
+                    secure: true,
                     cors: true
                 };
             },
@@ -46,7 +46,7 @@
                     type: 'GET',
                     dataType: 'json',
                     headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
-                    secure: false,
+                    secure: true,
                     cors: true
                 };
             },
@@ -57,7 +57,7 @@
                     type: 'GET',
                     dataType: 'json',
                     headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
-                    secure: false,
+                    secure: true,
                     cors: true
                 };
             },
@@ -69,7 +69,7 @@
                     type: 'GET',
                     dataType: 'json',
                     headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
-                    secure: false,
+                    secure: true,
                     cors: true
                 };
             },
@@ -80,7 +80,7 @@
                     type: 'GET',
                     dataType: 'json',
                     headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
-                    secure: false,
+                    secure: true,
                     cors: true
                 };
             },
@@ -91,7 +91,7 @@
                     type: 'GET',
                     dataType: 'json',
                     headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
-                    secure: false,
+                    secure: true,
                     cors: true
                 };
             }
