@@ -15,6 +15,7 @@
     "additionalComments": "Additional Comments",
     "submit": "Submit",
     "posted": "Issue created!",
-    "pushed": "This ticket was pushed to GitLab"
+    "pushed": "This ticket was pushed to GitLab",
+    "subject": "Subject"
   }
 }
