@@ -30,57 +30,69 @@
             postGitLab: function (project, data) {
                 this.showSpinner(true);
                 return {
-                    url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/issues?private_token={{setting.apiKey}}',
+                    url: settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/issues?',
                     type: 'POST',
                     dataType: 'json',
                     data: data,
-                    secure: true
+                    headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
+                    secure: false,
+                    cors: true
                 };
             },
             getProjects: function () {
                 this.showSpinner(true);
                 return {
-                    url: this.settings.gitlab_url + '/api/v3/projects?private_token={{setting.apiKey}}&per_page=100',
+                    url: settings.gitlab_url + '/api/v3/projects',
                     type: 'GET',
                     dataType: 'json',
-                    secure: true
+                    headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
+                    secure: false,
+                    cors: true
                 };
             },
             getMilestones: function () {
                 this.showSpinner(true);
                 return {
-                    url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/milestones/?private_token={{setting.apiKey}}&state=active',
+                    url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/milestones/?',
                     type: 'GET',
                     dataType: 'json',
-                    secure: true
+                    headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
+                    secure: false,
+                    cors: true
                 };
             },
             getIssue: function (issue_id, project_id) {
                 this.showSpinner(true);
 
                 return {
-                    url: this.settings.gitlab_url + '/api/v3/projects/' + project_id + '/issues/' + issue_id + '?private_token={{setting.apiKey}}',
+                    url: this.settings.gitlab_url + '/api/v3/projects/' + project_id + '/issues/' + issue_id + '?',
                     type: 'GET',
                     dataType: 'json',
-                    secure: true
+                    headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
+                    secure: false,
+                    cors: true
                 };
             },
             getLabels: function () {
                 this.showSpinner(true);
                 return {
-                    url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/labels?private_token={{setting.apiKey}}',
+                    url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/labels?',
                     type: 'GET',
                     dataType: 'json',
-                    secure: true
+                    headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
+                    secure: false,
+                    cors: true
                 };
             },
             getMembers: function () {
                 this.showSpinner(true);
                 return {
-                    url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/members?private_token={{setting.apiKey}}',
+                    url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/members?',
                     type: 'GET',
                     dataType: 'json',
-                    secure: true
+                    headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token},
+                    secure: false,
+                    cors: true
                 };
             }
         },
