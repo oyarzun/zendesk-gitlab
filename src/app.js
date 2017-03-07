@@ -370,7 +370,7 @@
             this.showSpinner(false);
             this.switchTo('showIssue', {
                 issue: data,
-                url: this.settings.gitlab_url + '/api/v3/projects/' + data.project_id + '/issues/' + data.id
+                url: data.web_url
             });
         },
         showSpinner: function(status) {
