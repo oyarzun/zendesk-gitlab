@@ -210,7 +210,7 @@
                     "assignee_id": asignee,
                     "milestone_id": milestone,
                     "due_date": "due_date",
-                    "labels": labels.join(',')
+                    "labels": labels ? labels.join(',') : ""
                 };
                 this.ajax('postGitLab', this.settings.project, data);
             }
