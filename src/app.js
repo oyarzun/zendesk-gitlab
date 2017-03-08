@@ -252,6 +252,7 @@
             // Wait for all three requests to finish
             var interval = setInterval(function () {
                 if (doneRequests == 3) {
+
                     clearInterval(interval);
                     this.showSpinner(false);
 
