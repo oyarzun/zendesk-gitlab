@@ -1,4 +1,6 @@
 (function () {
+  var PROJECT_STATUS_ARCHIVED = false;
+  
   return {
     PROJECT_TO_USE: 1,
     MEMBERS: [],
