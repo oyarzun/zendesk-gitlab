@@ -1,9 +1,9 @@
 {
-  "name": "VirtuMAN GitLab",
+  "name": "Gitlab Issue Creator",
   "version": "1.0.0",
   "author": {
-    "name": "Alexei Smirnov",
-    "email": "alexei@virtuman.com"
+    "name": "Support Manager",
+    "email": "supportmgr@trackforce.com"
   },
   "frameworkVersion": "1.0",
   "location": "ticket_sidebar",
