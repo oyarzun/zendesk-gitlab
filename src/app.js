@@ -187,6 +187,11 @@
         return false;
       }
       // Only show active projects and sort by name
+      /**
+       * @param {object} project - Data store for project information
+       * @param {boolean} project.archived - Filter results based on active projects only.
+       * @type {Array.<*>}
+       */
       data = data.filter( function ( project ) {
         return project.archived === PROJECT_STATUS_ARCHIVED;
       } ).map( function ( project ) {
@@ -212,7 +217,7 @@
 
       var subject = this.$( '#gitlab_subject' ).val();
       var labels = this.$( '#gitlab_labels' ).val();
-      var priority = this.$( '#gitlab_priority' ).val();
+      //var priority = this.$( '#gitlab_priority' ).val();
       var asignee = this.$( '#gitlab_assignee' ).val();
       var milestone = this.$( '#gitlab_milestone' ).val();
       var due_date = null;
