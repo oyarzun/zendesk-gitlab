@@ -121,6 +121,12 @@
       this.$( '.nav-pills li' ).removeClass( 'active' );
       this.$( '.nav-pills li.' + itemClass ).addClass( 'active' );
     },
+    /**
+     * @typedef {object} services - Creates notification inside zendesk page with related error text.
+     * @prop {object} this - Handlebars template object.
+     * @prop {function} this.switchTo(name, data) - Change view to new template, passing in name and data
+     * @param {string} error_text - Text to be displayed when error occurs.
+     */
     renderError: function ( error_text ) {
       services.notify( error_text, 'error' );
       this.switchTo( 'error', { error: error_text } );
@@ -137,12 +143,27 @@
       this.showSpinner( true );
       this.loadIfDataReady();
     },
+    /**
+     * @prop {object} this - Handlebars template object
+     * @prop {boolean} this.doneLoading - Set to true upon onActivated event
+     * @prop {function} this.ticket - Returns zendesk ticket object
+     * @prop {function} this.ticket.requester - Returns zendesk requester object.
+     */
     loadIfDataReady: function () {
       if ( !this.doneLoading && this.ticket().status() != null && this.ticket().requester().id() ) {
         this.doneLoading = true;
         this.ajax( 'getAudit', this.ticket().id() );
       }
     },
+    /**
+     * @prop {object} this - Handlebars template object
+     * @prop {object} this.I18n - Translation library that pulls from translations folder for strings.
+     * @prop {function} this.I18n.t({string}) - Pulls translation from folder and returns it in language of choice
+     * @param {object} result - Gitlab project data
+     * @param {string} result.web_url - Gitlab project URL
+     * @param {number} result.id - Gitlab internal issue ID
+     * @param {number} result.project_id - Gitlab internal project ID
+     */
     result: function ( result ) {
       services.notify( this.I18n.t( 'issue.posted' ) );
       var id = result.id;
