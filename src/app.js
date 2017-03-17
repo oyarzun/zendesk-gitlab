@@ -233,14 +233,28 @@
       if ( this.ticket().type() === "task" ) {
         due_date = this.ticket().customField( 'due_date' );
       }
+      var ticket = this.ticket();
+      var auditArray = [];
 
+      ticket.comments().forEach(function(comment, index, arr){
+        auditArray.push({id: comment.id(), author: comment.author().name(),
+                         value: comment.value()});
+                         //Strip HTML. http://stackoverflow.com/questions/822452/strip-html-from-text-javascript
+                         //.replace(/<(?:.|\n)*?>/gm, '')
+      });
+      var description = "";
+      for(var i = 0; i < auditArray.length; i++){
+        description = description + 'Author: ' + auditArray[i].author + '\n' + auditArray[i].value + '\n\n----------\n\n';
+      }
+      description = this.$( '#gitlab_note' ).val() + "\n\nTicket URL: https://" + this.currentAccount().subdomain() +
+                    ".zendesk.com/tickets/" + this.ticket().id() + "\n\n" + description;
       if ( subject.length < 1 ) {
         services.notify( 'You must include a subject.', 'error' );
       } else {
         var data = {
           "id": this.PROJECT_TO_USE,
           "title": subject,
-          "description": this.$( '#gitlab_note' ).val() + "\n\nTicket URL: https://" + this.currentAccount().subdomain() + ".zendesk.com/tickets/" + this.ticket().id() + "\n\n",
+          "description": description,
           "assignee_id": asignee,
           "milestone_id": milestone,
           "due_date": "due_date",
