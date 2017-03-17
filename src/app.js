@@ -1,6 +1,13 @@
 (function () {
   var PROJECT_STATUS_ARCHIVED = false;
 
+  /**
+   * @param {object} this.settings - Data blob for settings coming from startup arguments.
+   * @param {string} this.settings.gitlab_url - URL for Gitlab server to send issue information to.
+   * @param {string} this.settings.gitlab_private_token - Private token for authenticating API calls to Gitlab server.
+   * @param {boolean} this.settings.prepopulateTicketDescription - Set to true if we want all comments in zendesk ticket
+   *                                                               with attachments to be forwarded to gitlab issue.
+   */
   return {
     PROJECT_TO_USE: 1,
     MEMBERS: [],
