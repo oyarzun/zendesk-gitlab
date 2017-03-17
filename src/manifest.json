@@ -17,7 +17,7 @@
       "required": true
     },
     {
-      "name": "apiKey",
+      "name": "gitlab_private_token",
       "type": "text",
       "required": true,
       "secure": true

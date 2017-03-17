@@ -1,6 +1,6 @@
 (function () {
   var PROJECT_STATUS_ARCHIVED = false;
-  
+
   return {
     PROJECT_TO_USE: 1,
     MEMBERS: [],
@@ -31,11 +31,11 @@
       postGitLab: function ( project, data ) {
         this.showSpinner( true );
         return {
-          url: settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/issues?',
+          url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/issues?',
           type: 'POST',
           dataType: 'json',
           data: data,
-          headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token },
+          headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
           secure: true,
           cors: true
         };
@@ -43,10 +43,10 @@
       getProjects: function () {
         this.showSpinner( true );
         return {
-          url: settings.gitlab_url + '/api/v3/projects',
+          url: this.settings.gitlab_url + '/api/v3/projects',
           type: 'GET',
           dataType: 'json',
-          headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token },
+          headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
           secure: true,
           cors: true
         };
@@ -57,7 +57,7 @@
           url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/milestones/?',
           type: 'GET',
           dataType: 'json',
-          headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token },
+          headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
           secure: true,
           cors: true
         };
@@ -69,7 +69,7 @@
           url: this.settings.gitlab_url + '/api/v3/projects/' + project_id + '/issues/' + issue_id + '?',
           type: 'GET',
           dataType: 'json',
-          headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token },
+          headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
           secure: true,
           cors: true
         };
@@ -80,7 +80,7 @@
           url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/labels?',
           type: 'GET',
           dataType: 'json',
-          headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token },
+          headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
           secure: true,
           cors: true
         };
@@ -91,7 +91,7 @@
           url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/members?',
           type: 'GET',
           dataType: 'json',
-          headers: { 'PRIVATE-TOKEN': settings.gitlab_private_token },
+          headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
           secure: true,
           cors: true
         };
