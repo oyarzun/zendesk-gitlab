@@ -311,10 +311,14 @@
               description.push( comment.author().name() + ": \n" + comment.value() );
 
               comment.imageAttachments().forEach( function ( attachment ) {
-                description.push( JSON.stringify( attachment ) );
+                if(attachment && attachment.filename && attachment.contentUrl){
+                  description.push('![' + attachment.filename() + '](' + attachment.contentUrl() + ')')
+                }
               } );
               comment.nonImageAttachments().forEach( function ( attachment ) {
-                description.push( JSON.stringify( attachment ) );
+                if(attachment && attachment.filename && attachment.contentUrl){
+                  description.push('[' + attachment.filename() + '](' + attachment.contentUrl() + ')')
+                }
               } );
             } );
 
@@ -338,7 +342,7 @@
             labels: this.LABELS,
             members: this.MEMBERS,
             subject: this.ticket().subject(),
-            description: description.join( "\n\n" )
+            description: description.join( "\n" )
           } );
         }
       }.bind( this ), 500 );
