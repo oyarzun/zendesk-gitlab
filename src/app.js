@@ -220,12 +220,12 @@
       this.showSpinner( false );
     },
     /**
-     * @typedef {function} this.ticket.customField - Returns the ticket custom field value as its defined type. Specify
+     * @typedef {Function} this.ticket.customField - Returns the ticket custom field value as its defined type. Specify
      *                                               fieldName as custom_field_<custom field ID>
-     *         https://developer.zendesk.com/apps/docs/agent/data#ticket-object
-     * @typedef {object} this.currentAccount - Returns the current account as an account object.
-     *         https://developer.zendesk.com/apps/docs/agent/data#account-object
-     * @typedef {function} this.currentAccount.subdomain - Returns the current subdomain as a string.
+     *                                               https://developer.zendesk.com/apps/docs/agent/data#ticket-object
+     * @typedef {Object} this.currentAccount - Returns the current account as an account object.
+     *                                         https://developer.zendesk.com/apps/docs/agent/data#account-object
+     * @typedef {Function} this.currentAccount.subdomain - Returns the current subdomain as a string.
      */
     prep_to_post: function () {
       this.showSpinner( true );
@@ -304,18 +304,18 @@
 
           if ( this.settings.prepopulateTicketDescription ) {
             /**
-             * @param {object} comment - Comment object returned by ticket iterator.
-             * @param {function} comment.author - Returns author object for current comment.
-             * @param {function} comment.imageAttachments - Returns array of image attachment objects.
-             * @param {function} comment.nonImageAttachments - Returns array of non image attachment objects.
+             * @param {Object} comment - Comment object returned by ticket iterator.
+             * @param {Function} comment.author - Returns author object for current comment.
+             * @param {Function} comment.imageAttachments - Returns array of image attachment objects.
+             * @param {Function} comment.nonImageAttachments - Returns array of non image attachment objects.
              */
             this.ticket().comments().forEach( function ( comment, index ) {
               description.push( '**' + comment.author().name() + '** (Comment ' + index +'):\n' + comment.value() );
 
               /**
-               * @param {object} attachment - Attachment object from comment iterator
-               * @param {function} attachment.filename - Returns filename of attachment as string
-               * @param {function} attachment.contentUrl - Returns content url of attachment as string
+               * @param {Object} attachment - Attachment object from comment iterator
+               * @param {Function} attachment.filename - Returns filename of attachment as string
+               * @param {Function} attachment.contentUrl - Returns content url of attachment as string
                */
               comment.imageAttachments().forEach( function ( attachment ) {
                 if(attachment && attachment.filename && attachment.contentUrl){
@@ -324,9 +324,9 @@
               } );
 
               /**
-               * @param {object} attachment - Attachment object from comment iterator
-               * @param {function} attachment.filename - Returns filename of attachment as string
-               * @param {function} attachment.contentUrl - Returns content url of attachment as string
+               * @param {Object} attachment - Attachment object from comment iterator
+               * @param {Function} attachment.filename - Returns filename of attachment as string
+               * @param {Function} attachment.contentUrl - Returns content url of attachment as string
                */
               comment.nonImageAttachments().forEach( function ( attachment ) {
                 if(attachment && attachment.filename && attachment.contentUrl){
@@ -344,17 +344,17 @@
             }
             /**
              * https://developer.zendesk.com/apps/docs/agent/data#user-object
-             * @param {function} this.ticket.type - Gets the ticket type. Returns one of the following values: ticket,
+             * @param {Function} this.ticket.type - Gets the ticket type. Returns one of the following values: ticket,
              *                                      question, incident, problem, task.
-             * @param {function} this.ticket.assignee - Returns the ticket assignee as an object.
-             * @param {function} this.ticket.assignee.user - Returns user object for assignee attached to ticket.
-             *                                               https://developer.zendesk.com/apps/docs/agent/data#user-object
-             * @param {function} this.ticket.assignee.user.name - Returns the user name as a string.
-             * @param {function} this.ticket.priority - Returns one of: -, low, normal, high, urgent.
-             * @param {function} this.ticket.requester - Returns the ticket requester as an user object.
-             * @param {function} this.ticket.requester.name - Returns the ticket requester's name as a string.
-             * @param {function} this.ticket.status - Returns one of: new, open, pending, solved, closed, deleted.
-             * @param {function} this.ticket.createdAt - Returns when the ticket was created using the ISO 8601 format.
+             * @typedef {Function} this.ticket.assignee - Returns the ticket assignee as an object.
+             * @typedef {Function} this.ticket.assignee.user - Returns user object for assignee attached to ticket.
+             *                                            https://developer.zendesk.com/apps/docs/agent/data#user-object
+             * @param {Function} this.ticket.assignee.user.name - Returns the user name as a string.
+             * @param {Function} this.ticket.priority - Returns one of: -, low, normal, high, urgent.
+             * @param {Function} this.ticket.requester - Returns the ticket requester as an user object.
+             * @param {Function} this.ticket.requester.name - Returns the ticket requester's name as a string.
+             * @param {Function} this.ticket.status - Returns one of: new, open, pending, solved, closed, deleted.
+             * @param {Function} this.ticket.createdAt - Returns when the ticket was created using the ISO 8601 format.
              */
             description.push( "Type: " + this.ticket().type() );
             description.push( "Assignee: " + this.ticket().assignee().user().name() );
@@ -373,6 +373,14 @@
         }
       }.bind( this ), 500 );
     },
+    /**
+     * @param {Object} data - Holds information for history of internal messages in zendesk ticket
+     * @param {Array}  data.audits - Array of comment objects for history of ticket.
+     * @param {Number} data.count - Number of comments made on this ticket.
+     * @param {Object} data.audits[].metadata - Holds custom and system information.
+     * @param {Object} data.audits[].metadata.custom - Holds attributes about comment related to Gitlab issue this
+     *                                                 ticket has possibly been attached to. Empty on first use.
+     */
     listIssues: function ( data ) {
       var ticketHasIssue = false;
       var issueList = [];
@@ -433,6 +441,12 @@
     reset: function () {
       this.ajax( 'getAudit', this.ticket().id() );
     },
+
+    /**
+     * @param {Object} e - Browser event, expecting 'click'
+     * @member {Number} e.target.dataset.id - External (web url) version of issue id in Gitlab.
+     * @member {Number} e.target.dataset.pid - Internal identifier for Gitlab project clicked issue is attached to.
+     */
     get_issue: function ( e ) {
       this.showSpinner( true );
       var issue_id = e.target.dataset.id;
