@@ -213,12 +213,12 @@
       this.showSpinner( false );
     },
     /**
-     * @member {function} this.ticket.customField - Returns the ticket custom field value as its defined type. Specify
+     * @typedef {function} this.ticket.customField - Returns the ticket custom field value as its defined type. Specify
      *                                            fieldName as custom_field_<custom field ID>
      *         https://developer.zendesk.com/apps/docs/agent/data#ticket-object
-     * @member {object} this.currentAccount - Returns the current account as an account object.
+     * @typedef {object} this.currentAccount - Returns the current account as an account object.
      *         https://developer.zendesk.com/apps/docs/agent/data#account-object
-     * @member {function} this.currentAccount.subdomain - Returns the current subdomain as a string.
+     * @typedef {function} this.currentAccount.subdomain - Returns the current subdomain as a string.
      */
     prep_to_post: function () {
       this.showSpinner( true );
@@ -236,7 +236,7 @@
       var ticket = this.ticket();
       var auditArray = [];
 
-      ticket.comments().forEach(function(comment, index, arr){
+      ticket.comments().forEach(function(comment){
         auditArray.push({id: comment.id(), author: comment.author().name(),
                          value: comment.value()});
                          //Strip HTML. http://stackoverflow.com/questions/822452/strip-html-from-text-javascript
