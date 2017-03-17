@@ -260,7 +260,7 @@
           "due_date": "due_date",
           "labels": labels ? labels.join( ',' ) : ""
         };
-        this.ajax( 'postGitLab', this.settings.project, data );
+        this.ajax( 'postGitLab', this.PROJECT_TO_USE, data );
       }
     },
     projectSelect: function ( e ) {
