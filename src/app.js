@@ -233,21 +233,10 @@
       if ( this.ticket().type() === "task" ) {
         due_date = this.ticket().customField( 'due_date' );
       }
-      var ticket = this.ticket();
-      var auditArray = [];
 
-      ticket.comments().forEach(function(comment){
-        auditArray.push({id: comment.id(), author: comment.author().name(),
-                         value: comment.value()});
-                         //Strip HTML. http://stackoverflow.com/questions/822452/strip-html-from-text-javascript
-                         //.replace(/<(?:.|\n)*?>/gm, '')
-      });
-      var description = "";
-      for(var i = 0; i < auditArray.length; i++){
-        description = description + 'Author: ' + auditArray[i].author + '\n' + auditArray[i].value + '\n\n----------\n\n';
-      }
-      description = this.$( '#gitlab_note' ).val() + "\n\nTicket URL: https://" + this.currentAccount().subdomain() +
-                    ".zendesk.com/tickets/" + this.ticket().id() + "\n\n" + description;
+      var description = this.$( '#gitlab_note' ).val() + "\n\nTicket URL: https://" + this.currentAccount().subdomain() +
+                    ".zendesk.com/tickets/" + this.ticket().id() + "\n\n";
+
       if ( subject.length < 1 ) {
         services.notify( 'You must include a subject.', 'error' );
       } else {
@@ -307,14 +296,31 @@
           var description = [];
 
           if ( this.settings.prepopulateTicketDescription ) {
-            this.ticket().comments().forEach( function ( comment ) {
-              description.push( comment.author().name() + ": \n" + comment.value() );
+            /**
+             * @param {object} comment - Comment object returned by ticket iterator.
+             * @param {function} comment.author - Returns author object for current comment.
+             * @param {function} comment.imageAttachments - Returns array of image attachment objects.
+             * @param {function} comment.nonImageAttachments - Returns array of non image attachment objects.
+             */
+            this.ticket().comments().forEach( function ( comment, index ) {
+              description.push( '**' + comment.author().name() + '** (Comment ' + index +'):\n' + comment.value() );
 
+              /**
+               * @param {object} attachment - Attachment object from comment iterator
+               * @param {function} attachment.filename - Returns filename of attachment as string
+               * @param {function} attachment.contentUrl - Returns content url of attachment as string
+               */
               comment.imageAttachments().forEach( function ( attachment ) {
                 if(attachment && attachment.filename && attachment.contentUrl){
                   description.push('![' + attachment.filename() + '](' + attachment.contentUrl() + ')')
                 }
               } );
+
+              /**
+               * @param {object} attachment - Attachment object from comment iterator
+               * @param {function} attachment.filename - Returns filename of attachment as string
+               * @param {function} attachment.contentUrl - Returns content url of attachment as string
+               */
               comment.nonImageAttachments().forEach( function ( attachment ) {
                 if(attachment && attachment.filename && attachment.contentUrl){
                   description.push('[' + attachment.filename() + '](' + attachment.contentUrl() + ')')
