@@ -33,13 +33,13 @@ a.issue {
     border-bottom: 1px solid #eee;
     padding: .5em 0;
     display: block;
-    &:first-child {
-        border-top: 1px solid #eee;
-    }
-    &.is-done {
-        text-decoration: line-through;
-        opacity: .4;
-    }
+}
+a.issue:first-child {
+    border-top: 1px solid #eee;
+}
+a.issue.is-done {
+    text-decoration: line-through;
+    opacity: .4;
 }
 
 .form_field {
@@ -53,15 +53,14 @@ a.issue {
 .zdgitlab-list {
     list-style: none;
     margin: -5px;
-
-    &__entry {
-        padding: 5px;
-        margin: 0;
-        a {
-             display: block;
-        }
-        &:hover {
-            background-color: #ebebeb;
-        }
-    }
+}
+.zdgitlab-list__entry {
+    padding: 5px;
+    margin: 0;
+}
+.zdgitlab-list__entry a {
+    display: block;
+}
+.zdgitlab-list__entry:hover {
+    background-color: #ebebeb;
 }
