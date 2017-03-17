@@ -214,7 +214,7 @@
     },
     /**
      * @typedef {function} this.ticket.customField - Returns the ticket custom field value as its defined type. Specify
-     *                                            fieldName as custom_field_<custom field ID>
+     *                                               fieldName as custom_field_<custom field ID>
      *         https://developer.zendesk.com/apps/docs/agent/data#ticket-object
      * @typedef {object} this.currentAccount - Returns the current account as an account object.
      *         https://developer.zendesk.com/apps/docs/agent/data#account-object
@@ -235,7 +235,7 @@
       }
 
       var description = this.$( '#gitlab_note' ).val() + "\n\nTicket URL: https://" + this.currentAccount().subdomain() +
-                    ".zendesk.com/tickets/" + this.ticket().id() + "\n\n";
+                        ".zendesk.com/tickets/" + this.ticket().id() + "\n\n";
 
       if ( subject.length < 1 ) {
         services.notify( 'You must include a subject.', 'error' );
@@ -335,7 +335,20 @@
             if ( this.ticket().type() === "task" ) {
               description.push( "Due Date: " + this.ticket().customField( 'due_date' ) );
             }
-
+            /**
+             * https://developer.zendesk.com/apps/docs/agent/data#user-object
+             * @param {function} this.ticket.type - Gets the ticket type. Returns one of the following values: ticket,
+             *                                      question, incident, problem, task.
+             * @param {function} this.ticket.assignee - Returns the ticket assignee as an object.
+             * @param {function} this.ticket.assignee.user - Returns user object for assignee attached to ticket.
+             *                                               https://developer.zendesk.com/apps/docs/agent/data#user-object
+             * @param {function} this.ticket.assignee.user.name - Returns the user name as a string.
+             * @param {function} this.ticket.priority - Returns one of: -, low, normal, high, urgent.
+             * @param {function} this.ticket.requester - Returns the ticket requester as an user object.
+             * @param {function} this.ticket.requester.name - Returns the ticket requester's name as a string.
+             * @param {function} this.ticket.status - Returns one of: new, open, pending, solved, closed, deleted.
+             * @param {function} this.ticket.createdAt - Returns when the ticket was created using the ISO 8601 format.
+             */
             description.push( "Type: " + this.ticket().type() );
             description.push( "Assignee: " + this.ticket().assignee().user().name() );
             description.push( "Priority: " + this.ticket().priority() );
