@@ -356,12 +356,12 @@
              * @param {Function} this.ticket.status - Returns one of: new, open, pending, solved, closed, deleted.
              * @param {Function} this.ticket.createdAt - Returns when the ticket was created using the ISO 8601 format.
              */
-            description.push( "Type: " + this.ticket().type() );
-            description.push( "Assignee: " + this.ticket().assignee().user().name() );
-            description.push( "Priority: " + this.ticket().priority() );
-            description.push( "Requester: " + this.ticket().requester().name() );
-            description.push( "Status: " + this.ticket().status() );
-            description.push( "Created: " + this.ticket().createdAt() );
+            description.push( "**Type**: " + this.ticket().type() + "\r" );
+            description.push( "**Assignee**: " + this.ticket().assignee().user().name() + "\r" );
+            description.push( "**Priority**: " + this.ticket().priority() + "\r" );
+            description.push( "**Requester**: " + this.ticket().requester().name() + "\r" );
+            description.push( "**Status**: " + this.ticket().status() + "\r" );
+            description.push( "**Created**: " + this.ticket().createdAt() + "\r" );
           }
 
           this.switchTo( 'newIssue', {
