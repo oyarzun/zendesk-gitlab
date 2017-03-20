@@ -304,13 +304,17 @@
 
           if ( this.settings.prepopulateTicketDescription ) {
             /**
+             * Stars (**) around author name show up as bold on Gitlab description. Comment numbering matches ordering
+             * from zendesk ticket internal comments. Put each comment in a Markdown block quote for readability.
              * @param {Object} comment - Comment object returned by ticket iterator.
              * @param {Function} comment.author - Returns author object for current comment.
              * @param {Function} comment.imageAttachments - Returns array of image attachment objects.
              * @param {Function} comment.nonImageAttachments - Returns array of non image attachment objects.
              */
-            this.ticket().comments().forEach( function ( comment, index ) {
-              description.push( '**' + comment.author().name() + '** (Comment ' + index +'):\n' + comment.value() );
+            this.ticket().comments().forEach( function ( comment, index, arr ) {
+              description.push( '**' + comment.author().name() + '** (Comment ' + (arr.length - index) + '):' );
+              description.push('>>>'); // Open block-quote
+              description.push(comment.value().replace(/>\s</g, '><')); //Remove whitespace between html elements.
 
               /**
                * @param {Object} attachment - Attachment object from comment iterator
@@ -333,6 +337,7 @@
                   description.push('[' + attachment.filename() + '](' + attachment.contentUrl() + ')')
                 }
               } );
+              description.push('>>>\n'); //Close Blockquote
             } );
 
             if ( this.ticket().type() === "incident" && this.ticket().customField( 'problem_id' ) ) {
