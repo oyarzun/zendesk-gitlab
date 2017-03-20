@@ -241,8 +241,8 @@
         due_date = this.ticket().customField( 'due_date' );
       }
 
-      var description = this.$( '#gitlab_note' ).val() + "\n\nTicket URL: https://" + this.currentAccount().subdomain() +
-                        ".zendesk.com/tickets/" + this.ticket().id() + "\n\n";
+      var description = "Ticket URL: https://" + this.currentAccount().subdomain() +
+                        ".zendesk.com/tickets/" + this.ticket().id() + "\n\n" + this.$( '#gitlab_note' ).val();
 
       if ( subject.length < 1 ) {
         services.notify( 'You must include a subject.', 'error' );
