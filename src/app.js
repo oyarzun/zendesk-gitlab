@@ -242,7 +242,7 @@
       }
 
       var description = "Ticket URL: https://" + this.currentAccount().subdomain() +
-                        ".zendesk.com/tickets/" + this.ticket().id() + "\n\n" + this.$( '#gitlab_note' ).val();
+                        ".zendesk.com/tickets/" + this.ticket().id() + "\r\n\r\n" + this.$( '#gitlab_note' ).val();
 
       if ( subject.length < 1 ) {
         services.notify( 'You must include a subject.', 'error' );
@@ -436,6 +436,9 @@
 
       var interval = setInterval( function () {
         if ( spawned == returned ) {
+          issueDetails = issueDetails.sort(function(a, b){
+            return a.id - b.id;
+          });
           clearTimeout( interval );
 
           this.setActivePill( 'js-issues' );
