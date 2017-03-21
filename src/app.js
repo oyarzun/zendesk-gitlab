@@ -253,7 +253,7 @@
           "description": description,
           "milestone_id": milestone,
           "due_date": "due_date",
-          "labels": labels ? labels.join( ',' ) : ""
+          "labels": "To Do"//labels ? labels.join( ',' ) : ""
         };
         // Don't add optional 'assignee_id' parameter if Issue is to remain unassigned.
         if(assignee.toLowerCase() !== 'unassigned'){ data['assignee_id'] = assignee}
