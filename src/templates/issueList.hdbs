@@ -1,3 +1,4 @@
+<label for="hideClosedIssues"><input type="checkbox" id="hideClosedIssues"/><span>Hide Closed Issues</span></label>
 {{#each issues}}
     <a class="issue {{#if this.closed}} is-done {{/if}}" data-id="{{this.id}}" data-pid="{{this.project_id}}">
         {{this.id}}: {{this.title}}

@@ -122,6 +122,13 @@
       'click .nav-pills .js-issues': function () {
         this.setActivePill( 'js-issues' );
         this.ajax( 'getAudit', this.ticket().id() );
+      },
+      'click #hideClosedIssues': function (){
+        if(this.$('#hideClosedIssues').is(':checked')){
+          this.$('a.issue.is-done').hide();
+        } else {
+          this.$('a.issue.is-done').show();
+        }
       }
     },
     setActivePill: function ( itemClass ) {

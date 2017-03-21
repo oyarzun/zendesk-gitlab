@@ -42,6 +42,12 @@ a.issue.is-done {
     opacity: .4;
 }
 
+#hideClosedIssues {
+    width: inherit;
+    display: inline-block;
+    margin-right: 5px;
+}
+
 .form_field {
     margin-bottom: 8px;
 }
