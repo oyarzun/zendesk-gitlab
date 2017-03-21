@@ -233,7 +233,7 @@
       var subject = this.$( '#gitlab_subject' ).val();
       var labels = this.$( '#gitlab_labels' ).val();
       //var priority = this.$( '#gitlab_priority' ).val();
-      var asignee = this.$( '#gitlab_assignee' ).val();
+      var assignee = this.$( '#gitlab_assignee' ).val();
       var milestone = this.$( '#gitlab_milestone' ).val();
       var due_date = null;
 
@@ -251,11 +251,12 @@
           "id": this.PROJECT_TO_USE,
           "title": subject,
           "description": description,
-          "assignee_id": asignee,
           "milestone_id": milestone,
           "due_date": "due_date",
           "labels": labels ? labels.join( ',' ) : ""
         };
+        // Don't add optional 'assignee_id' parameter if Issue is to remain unassigned.
+        if(assignee.toLowerCase() !== 'unassigned'){ data['assignee_id'] = assignee}
         this.ajax( 'postGitLab', this.PROJECT_TO_USE, data );
       }
     },
@@ -284,10 +285,11 @@
       this.ajax( 'getMembers' )
         .done( function ( data ) {
           var members = [];
+          members.push({id: null, name: "Unassigned"});
           data.forEach( function ( membership ) {
             members.push( membership );
           } );
-          this.MEMBERS = data;
+          this.MEMBERS = members;
         }.bind( this ) )
         .always( function () {
           doneRequests++;
