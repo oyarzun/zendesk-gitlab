@@ -197,7 +197,7 @@
     },
     listProjects: function ( data ) {
       if ( data == null ) {
-        this.renderError( "No data returned. Please check your API key." );
+        this.renderError( this.I18n.t('error.noDataReturned') );
         return false;
       }
       // Only show active projects and sort by name
@@ -248,11 +248,11 @@
         due_date = this.ticket().customField( 'due_date' );
       }
 
-      var description = "Ticket URL: https://" + this.currentAccount().subdomain() +
+      var description = this.I18n.t('issue.ticketUrl') + ": https://" + this.currentAccount().subdomain() +
                         ".zendesk.com/tickets/" + this.ticket().id() + "\r\n\r\n" + this.$( '#gitlab_note' ).val();
 
       if ( subject.length < 1 ) {
-        services.notify( 'You must include a subject.', 'error' );
+        services.notify( this.I18n.t('error.noSubjectIncluded'), 'error' );
       } else {
         var data = {
           "id": this.PROJECT_TO_USE,
@@ -370,12 +370,12 @@
              * @param {Function} this.ticket.status - Returns one of: new, open, pending, solved, closed, deleted.
              * @param {Function} this.ticket.createdAt - Returns when the ticket was created using the ISO 8601 format.
              */
-            description.push( "**Type**: " + this.ticket().type());
-            description.push( "**Assignee**: " + this.ticket().assignee().user().name());
-            description.push( "**Priority**: " + this.ticket().priority());
-            description.push( "**Requester**: " + this.ticket().requester().name());
-            description.push( "**Status**: " + this.ticket().status() );
-            description.push( "**Created**: " + this.ticket().createdAt() );
+            description.push( "**" + this.I18n.t('issue.type') + "**: " + this.ticket().type());
+            description.push( "**" + this.I18n.t('issue.assignee') + "**: " + this.ticket().assignee().user().name());
+            description.push( "**" + this.I18n.t('issue.priority') + "**: " + this.ticket().priority());
+            description.push( "**" + this.I18n.t('issue.requester') + "**: " + this.ticket().requester().name());
+            description.push( "**" + this.I18n.t('issue.status') + "**: " + this.ticket().status() );
+            description.push( "**" + this.I18n.t('issue.created') + "**: " + this.ticket().createdAt() );
           }
 
           this.switchTo( 'newIssue', {
@@ -434,7 +434,7 @@
             issueDetails.push( data );
           }.bind( this ) )
           .fail( function () {
-            this.renderError( "Specified issue ticket was not found in " + this.name() );
+            this.renderError( this.I18n.t('error.issueTicketNotFound') + this.name() );
           } )
           .always( function () {
             returned++;
@@ -473,7 +473,7 @@
           this.show_issue( data );
         }.bind( this ) )
         .fail( function () {
-          this.renderError( "Specified issue ticket was not found in " + this.name() );
+          this.renderError( this.I18n.t('error.issueTicketNotFound') + this.name() );
         } );
     },
     show_issue: function ( data ) {

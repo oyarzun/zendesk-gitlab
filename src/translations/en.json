@@ -16,6 +16,18 @@
     "submit": "Submit",
     "posted": "Issue created!",
     "pushed": "This ticket was pushed to GitLab",
-    "subject": "Subject"
+    "subject": "Subject",
+    "ticketUrl": "Ticket URL",
+    "type": "Type",
+    "assignee": "Assignee",
+    "priority": "Priority",
+    "requester": "Requester",
+    "status": "Status",
+    "created": "Created"
+  },
+  "error":{
+    "noDataReturned": "No data returned. Please check your API key.",
+    "noSubjectIncluded": "You must include a subject.",
+    "issueTicketNotFound": "Specified issue ticket was not found in "
   }
 }
