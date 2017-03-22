@@ -146,7 +146,7 @@
       this.switchTo( 'error', { error: error_text } );
     },
     onActivated: function () {
-      console.log( 'Zendesk-GitLab loaded' );
+      console.log( 'Zendesk-GitLab Loaded' );
 
       // Remove trailing slash from gitlab_url
       if ( this.settings.gitlab_url.search( '\/$' ) != -1 ) {
@@ -238,7 +238,7 @@
       this.showSpinner( true );
 
       var subject = this.$( '#gitlab_subject' ).val();
-      var labels = this.$( '#gitlab_labels' ).val();
+      //var labels = this.$( '#gitlab_labels' ).val();
       //var priority = this.$( '#gitlab_priority' ).val();
       var assignee = this.$( '#gitlab_assignee' ).val();
       var milestone = this.$( '#gitlab_milestone' ).val();
