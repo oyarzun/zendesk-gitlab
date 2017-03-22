@@ -6,8 +6,10 @@
     <br />
     <p>
         <span class="label">{{ issue.labels }}</span> /
-        <span class="label">{{ issue.state }}</span> /
-        <span class="label">{{ issue.priority }}</span>
+        <span class="label">{{ issue.state }}</span>
+        <!--/
+            <span class="label">{{ issue.priority }}</span>
+        -->
     </p>
     <br />
     <p class="caption subject">{{t 'issue.title'}}</p>
@@ -19,8 +21,9 @@
 <p class="caption">{{t 'issue.description'}}</p>
 <p>{{ issue.description }}</p>
 <br />
-<p class="caption">{{issue.done_ratio}}% {{t 'issue.done'}}
-<div class="progress">
-  <div class="bar" style="width: {{issue.done_ratio}}%;"></div>
-</div></p>
+<!-- <p class="caption">{{issue.done_ratio}}% {{t 'issue.done'}}
+        <div class="progress">
+            <div class="bar" style="width: {{issue.done_ratio}}%;"></div>
+        </div>
+</p> -->
 </div>
