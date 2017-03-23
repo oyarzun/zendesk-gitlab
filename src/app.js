@@ -263,7 +263,7 @@
           "labels": "To Do"//labels ? labels.join( ',' ) : ""
         };
         // Don't add optional 'assignee_id' parameter if Issue is to remain unassigned.
-        if(assignee.toLowerCase() !== 'unassigned'){ data['assignee_id'] = assignee}
+        if(assignee.toLowerCase() !== 'unassigned'){ data['assignee_id'] = assignee; }
         this.ajax( 'postGitLab', this.PROJECT_TO_USE, data );
       }
     },
@@ -332,7 +332,7 @@
                */
               comment.imageAttachments().forEach( function ( attachment ) {
                 if(attachment && attachment.filename && attachment.contentUrl){
-                  description.push('![' + attachment.filename() + '](' + attachment.contentUrl() + ')')
+                  description.push('![' + attachment.filename() + '](' + attachment.contentUrl() + ')');
                 }
               } );
 
@@ -343,7 +343,7 @@
                */
               comment.nonImageAttachments().forEach( function ( attachment ) {
                 if(attachment && attachment.filename && attachment.contentUrl){
-                  description.push('[' + attachment.filename() + '](' + attachment.contentUrl() + ')')
+                  description.push('[' + attachment.filename() + '](' + attachment.contentUrl() + ')');
                 }
               } );
               description.push('>>>\n'); //Close Blockquote
