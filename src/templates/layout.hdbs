@@ -5,7 +5,7 @@
 <section class="navigation">
     <ul class="nav nav-pills">
         <li class="js-issues active"><a class="issues">{{t 'issues'}}</a></li>
-        <li class="js-projects"><a class="projects">{{t 'projects'}}</a></li>
+        <li class="js-projects"><a class="projects">{{t 'newIssue'}}</a></li>
     </ul>
 </section>
 <div id="spinner">{{ spinner 'dotted' }}</div>

@@ -4,6 +4,7 @@
   "openInGitLab" : "Open in GitLab",
   "issues": "Issues",
   "projects": "Projects",
+  "newIssue": "New Issue",
   "issue": {
     "title": "Title",
     "labels": "Labels",
