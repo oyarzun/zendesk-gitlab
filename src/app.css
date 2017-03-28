@@ -1,12 +1,16 @@
 textarea {
     width: 280px;
-    height: 100px;
+    height: 75px;
     border-color: #d3d3d3;
     background-image: none;
 }
 
 input {
     width: 280px;
+}
+
+input:invalid, textarea:invalid {
+    border: 1px dotted red;
 }
 
 #newIssue {
