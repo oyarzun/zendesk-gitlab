@@ -149,7 +149,7 @@
       console.log( 'Zendesk-GitLab Loaded' );
 
       // Remove trailing slash from gitlab_url
-      if ( this.settings.gitlab_url.search( '\/$' ) != -1 ) {
+      if ( this.settings.gitlab_url.search( '\/$' ) !== -1 ) {
         this.settings.gitlab_url = this.settings.gitlab_url.slice( 0, -1 );
       }
 
@@ -164,7 +164,7 @@
      * @prop {function} this.ticket.requester - Returns zendesk requester object.
      */
     loadIfDataReady: function () {
-      if ( !this.doneLoading && this.ticket().status() != null && this.ticket().requester().id() ) {
+      if ( !this.doneLoading && this.ticket().status() !== null && this.ticket().requester().id() ) {
         this.doneLoading = true;
         this.ajax( 'getAudit', this.ticket().id() );
       }
@@ -196,24 +196,32 @@
       this.ajax( 'updateTicket', this.ticket().id(), data );
     },
     listProjects: function ( data ) {
-      if ( data == null ) {
+      if ( data === null ) {
         this.renderError( this.I18n.t('error.noDataReturned') );
         return false;
       }
       // Only show active projects and sort by name
       /**
        * @param {object} project - Data store for project information
+       * @param {string} project.name - Name of project returned by Gitlab.
        * @param {boolean} project.archived - Filter results based on active projects only.
        * @type {Array.<*>}
        */
       data = data.filter( function ( project ) {
         return project.archived === PROJECT_STATUS_ARCHIVED;
-      } ).map( function ( project ) {
+      } )
+        .map( function ( project ) {
         // Prefix parent project's name
         if ( project.hasOwnProperty( 'parent' ) ) {
-          project.name = project.parent.name + ' - ' + project.name;
+          project['name'] = project.parent.name + ' - ' + project.name;
         }
         return project;
+        /**
+         * @param {object} a - Object to be compared
+         * @param {object} b - Object to be compared
+         * @param {string} a.name - String to be compared.
+         * @param {string} b.name - String to be compared.
+         */
       } ).sort( function ( a, b ) {
         if ( a.name.toLowerCase() < b.name.toLowerCase() ) return -1;
         if ( a.name.toLowerCase() > b.name.toLowerCase() ) return 1;
@@ -280,7 +288,7 @@
       var assignee = this.$( '#gitlab_assignee' ).val();
       var milestone = this.$( '#gitlab_milestone' ).val();
       var due_date = null;
-      
+
       if ( this.ticket().type() === "task" ) {
         due_date = this.ticket().customField( 'due_date' );
       }
@@ -342,7 +350,7 @@
 
       // Wait for all three requests to finish
       var interval = setInterval( function () {
-        if ( doneRequests == 3 ) {
+        if ( doneRequests === 3 ) {
 
           clearInterval( interval );
           this.showSpinner( false );
@@ -469,7 +477,7 @@
         spawned++;
         this.ajax( 'getIssue', issue.issue_id, issue.project_id )
           .done( function ( data ) {
-            data.closed = (data.state == 'closed');
+            data.closed = (data.state === 'closed');
             issueDetails.push( data );
           }.bind( this ) )
           .fail( function () {
@@ -481,7 +489,7 @@
       }.bind( this ) );
 
       var interval = setInterval( function () {
-        if ( spawned == returned ) {
+        if ( spawned === returned ) {
           issueDetails = issueDetails.sort(function(a, b){
             return a.id - b.id;
           });
