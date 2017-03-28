@@ -1,6 +1,6 @@
 (function () {
   var PROJECT_STATUS_ARCHIVED = false;
-
+  const APPLICATION_CUSTOM_FIELD = 'custom_field_22138939';
   /**
    * @param {object} this.settings - Data blob for settings coming from startup arguments.
    * @param {string} this.settings.gitlab_url - URL for Gitlab server to send issue information to.
@@ -221,7 +221,6 @@
       } );
 
       this.PROJECTS = data;
-      const APPLICATION_CUSTOM_FIELD = 'custom_field_22138939';
       const ANDROID_INSPECTOR_PROJECT_ID = 20,
             ANDROID_M_POST_PROJECT_ID = 16,
             ANDROID_PATROL_PROJECT_ID = 18,
@@ -267,24 +266,31 @@
      * @typedef {Function} this.currentAccount.subdomain - Returns the current subdomain as a string.
      */
     prep_to_post: function () {
-      this.showSpinner( true );
 
-      var subject = this.$( '#gitlab_subject' ).val();
+      var subject = this.$( '#gitlab_subject' ).val(),
+          issue_application = this.$('#issue_application').val(),
+          issue_observed_behavior = this.$('#issue_observed_behavior').val(),
+          issue_login_info = this.$('#issue_login_info').val(),
+          issue_client_info = this.$('#issue_client_info').val(),
+          issue_site_info = this.$('#issue_site_info').val(),
+          issue_error_message = this.$('#issue_error_message').val(),
+          issue_detailed_steps = this.$('#issue_detailed_steps').val();
       //var labels = this.$( '#gitlab_labels' ).val();
       //var priority = this.$( '#gitlab_priority' ).val();
       var assignee = this.$( '#gitlab_assignee' ).val();
       var milestone = this.$( '#gitlab_milestone' ).val();
       var due_date = null;
-
+      
       if ( this.ticket().type() === "task" ) {
         due_date = this.ticket().customField( 'due_date' );
       }
 
       var description = this.I18n.t('issue.ticketUrl') + ": https://" + this.currentAccount().subdomain() +
                         ".zendesk.com/tickets/" + this.ticket().id() + "\r\n\r\n" + this.$( '#gitlab_note' ).val();
-
-      if ( subject.length < 1 ) {
-        services.notify( this.I18n.t('error.noSubjectIncluded'), 'error' );
+      if ( subject.length < 1 || issue_application.length < 1 || issue_observed_behavior.length < 1 ||
+           issue_login_info.length < 1 || issue_client_info.length < 1 || issue_site_info < 1 ||
+           issue_detailed_steps.length < 1) {
+        services.notify( this.I18n.t('error.requiredFieldMissing'), 'error' );
       } else {
         var data = {
           "id": this.PROJECT_TO_USE,
@@ -414,6 +420,7 @@
             labels: this.LABELS,
             members: this.MEMBERS,
             subject: this.ticket().subject(),
+            application: this.ticket().customField(APPLICATION_CUSTOM_FIELD),
             description: description.join( "\n" )
           } );
         }

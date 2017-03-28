@@ -1,8 +1,8 @@
 <div id="newIssue">
-    <div class="form_field">
-        <label>{{t 'issue.subject'}}</label>
-        <p><input type="text" value="{{ subject }}" id="gitlab_subject"></p>
-    </div>
+    <form class="form_field">
+        <label for="gitlab_subject">{{t 'issue.subject'}}</label>
+        <p><input type="text" value="{{ subject }}" id="gitlab_subject" required></p>
+
 <!--<div class="form_field">
         <label>{{t 'issue.labels'}}</label>
         <select id="gitlab_labels" multiple size="6">
@@ -12,19 +12,38 @@
         </select>
     </div>
 -->
-    <div class="form_field">
-        <label>{{t 'issue.assignTo'}}</label>
+
+        <label for="gitlab_assignee">{{t 'issue.assignTo'}}</label>
         <select id="gitlab_assignee">
             {{#each members}}
                 <option value="{{this.id}}">{{this.name}}</option>
             {{/each}}
         </select>
-    </div>
-    <div class="form_field">
-        <label>{{t 'issue.additionalComments'}}</label>
+
+        <label for="issue_application">{{t 'issue.application'}}</label>
+        <input type="text" id="issue_application" value="{{ application }}" required/>
+
+        <label for="issue_observed_behavior" title="{{t 'issue.observedBehaviorTitle'}}">{{t 'issue.observedBehavior'}}</label>
+        <textarea id="issue_observed_behavior" required></textarea>
+
+        <label for="issue_login_info" title="{{t 'issue.loginInfoTitle'}}">{{t 'issue.loginInfo'}}</label>
+        <input type="text" id="issue_login_info" required />
+
+        <label for="issue_client_info" title="{{t 'issue.clientInfoTitle'}}">{{t 'issue.client'}}</label>
+        <input type="text" id="issue_client_info" required />
+
+        <label for="issue_site_info" title="{{t 'issue.siteInfoTitle'}}">{{t 'issue.site'}}</label>
+        <input type="text" id="issue_site_info" required />
+
+        <label for="issue_error_message" title="{{t 'issue.errorMessageTitle'}}">{{t 'issue.errorMessage'}}</label>
+        <textarea id="issue_error_message" ></textarea>
+
+        <label for="issue_detailed_steps" title="{{t 'issue.detailedStepsTitle'}}">{{t 'issue.detailedSteps'}}</label>
+        <textarea id="issue_detailed_steps" required ></textarea>
+
+        <label for="gitlab_note" >{{t 'issue.additionalComments'}}</label>
         <textarea id="gitlab_note" >{{ description }}</textarea>
-    </div>
-    <div class="form__field">
+
         <p><a class="btn" id="submitToGitLab">{{t 'issue.submit'}}</a></p>
-    </div>
+    </form>
 </div>
