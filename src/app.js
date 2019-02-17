@@ -114,7 +114,6 @@
       'updateTicket.done': 'reset',
       'click .issue': 'get_issue',
       'click .back_button': 'onActivated',
-      'projectChoice': 'projectSelect',
       'click .nav-pills .js-projects': function () {
         this.setActivePill( 'js-projects' );
         this.ajax( 'getProjects' );
@@ -229,41 +228,9 @@
       } );
 
       this.PROJECTS = data;
-      const ANDROID_INSPECTOR_PROJECT_ID = 20,
-            ANDROID_M_POST_PROJECT_ID = 16,
-            ANDROID_PATROL_PROJECT_ID = 18,
-            GUARDTEK_POST_PROJECT_ID = 93;
-      var appChoice = this.ticket().customField(APPLICATION_CUSTOM_FIELD);
-      switch(appChoice){
-        case('guardtek_inspector'):
-          this.trigger( 'projectChoice', { target: { id: ANDROID_INSPECTOR_PROJECT_ID } } );
-          break;
-        case('guardtek_m_post'):
-          this.trigger( 'projectChoice', { target: { id: ANDROID_M_POST_PROJECT_ID } } );
-          break;
-        case('guardtek_patrol__android_'):
-          this.trigger( 'projectChoice', { target: { id: ANDROID_PATROL_PROJECT_ID } } );
-          break;
-        case('guardtek_post'):
-        case('guardtek_web_platform'):
-          this.trigger( 'projectChoice', { target: { id: GUARDTEK_POST_PROJECT_ID } } );
-          break;
-        case('guardtek_help_center'):
-        case('guardtek_patrol_sonim'):
-        case('on_boarding'):
-          console.log('**Prevent Issue Creation');
-          this.switchTo( 'error', { error: 'Sorry! There is no Gitlab project associated with this Application.' } );
-          this.showSpinner( false );
-          break;
-        case(null):
-        case('other_see_notes'):
-        default:
-          console.log('**Project List.');
-          this.setActivePill( 'js-projects' );
-          this.switchTo( 'projectList', { project_data: data } );
-          this.showSpinner( false );
-          break;
-      }
+      this.setActivePill( 'js-projects' );
+      this.switchTo( 'projectList', { project_data: data } );
+      this.showSpinner( false );
     },
     /**
      * @typedef {Function} this.ticket.customField - Returns the ticket custom field value as its defined type. Specify
