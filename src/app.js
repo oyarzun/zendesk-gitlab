@@ -1,3 +1,4 @@
+/*jshint esnext: true */
 (function () {
   var PROJECT_STATUS_ARCHIVED = false;
   const APPLICATION_CUSTOM_FIELD = 'custom_field_22138939';

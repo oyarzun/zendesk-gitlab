@@ -1,4 +1,24 @@
 {
+  "app": {
+      "name": "GitLab Issue Creator",
+      "parameters": {
+          "gitlab_url": {
+              "label": "GitLab URL",
+              "helpText":
+                  "Enter your GitLab URL e.g. https://gitlab.domain.com"
+          },
+          "gitlab_private_token": {
+              "label": "GitLab Private Token",
+              "helpText":
+                  "Enter the GitLab Private token used for api access."
+          },
+          "prepopulateTicketDescription": {
+              "label": "Prepopulate the ticket description",
+              "helpText":
+                  "Prepopulate the ticket description."
+          }
+      }
+  },
   "no-entries": "There are no assigned issues.",
   "back" : "Back",
   "openInGitLab" : "Open in GitLab",
