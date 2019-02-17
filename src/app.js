@@ -38,7 +38,7 @@
       postGitLab: function ( project, data ) {
         this.showSpinner( true );
         return {
-          url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/issues?',
+          url: this.settings.gitlab_url + '/api/v4/projects/' + this.PROJECT_TO_USE + '/issues?',
           type: 'POST',
           dataType: 'json',
           data: data,
@@ -50,7 +50,7 @@
       getProjects: function () {
         this.showSpinner( true );
         return {
-          url: this.settings.gitlab_url + '/api/v3/projects?per_page=100',
+          url: this.settings.gitlab_url + '/api/v4/projects?per_page=100',
           type: 'GET',
           dataType: 'json',
           headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
@@ -61,7 +61,7 @@
       getMilestones: function () {
         this.showSpinner( true );
         return {
-          url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/milestones/?',
+          url: this.settings.gitlab_url + '/api/v4/projects/' + this.PROJECT_TO_USE + '/milestones/?',
           type: 'GET',
           dataType: 'json',
           headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
@@ -73,7 +73,7 @@
         this.showSpinner( true );
 
         return {
-          url: this.settings.gitlab_url + '/api/v3/projects/' + project_id + '/issues/' + issue_id + '?',
+          url: this.settings.gitlab_url + '/api/v4/projects/' + project_id + '/issues/' + issue_id + '?',
           type: 'GET',
           dataType: 'json',
           headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
@@ -84,7 +84,7 @@
       getLabels: function () {
         this.showSpinner( true );
         return {
-          url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/labels?',
+          url: this.settings.gitlab_url + '/api/v4/projects/' + this.PROJECT_TO_USE + '/labels?',
           type: 'GET',
           dataType: 'json',
           headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
@@ -95,7 +95,7 @@
       getMembers: function () {
         this.showSpinner( true );
         return {
-          url: this.settings.gitlab_url + '/api/v3/projects/' + this.PROJECT_TO_USE + '/members?',
+          url: this.settings.gitlab_url + '/api/v4/projects/' + this.PROJECT_TO_USE + '/members?',
           type: 'GET',
           dataType: 'json',
           headers: { 'PRIVATE-TOKEN': this.settings.gitlab_private_token },
